@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>social networking website</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        /* Popup container */
+        .popup-container {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 100px;
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            border-radius: 5px;
+            /* Optional: for rounded corners */
+        }
+
+        /* Close button */
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Desktop screens */
+        @media (min-width: 768px) {
+            #loginContainer {
+                flex-direction: row;
+                gap: 2rem;
+            }
+
+            #loginSection,
+            #loginImage {
+                width: 50%;
+                /* Adjust the width as necessary */
+            }
+        }
+
+        /* Phone screens */
+        @media (max-width: 767px) {
+            #loginContainer {
+                flex-direction: column;
+            }
+
+            #loginImage {
+                display: none;
+                /* Hide the image on smaller screens */
+            }
+
+            #loginSection {
+                width: 100%;
+                /* Take full width */
+            }
+        }
+
+
+        /* Desktop screens */
+        @media (min-width: 768px) {
+            #signupContainer {
+                flex-direction: row;
+                /* Align side-by-side */
+            }
+
+            #signupSection,
+            #signupImage {
+                width: 50%;
+                /* Adjust the width as necessary */
+            }
+        }
+
+        /* Phone screens */
+        @media (max-width: 767px) {
+            #signupContainer {
+                flex-direction: column;
+            }
+
+            #signupImage {
+                display: none;
+                /* Hide the image on smaller screens */
+            }
+
+            #signupSection {
+                width: 100%;
+                /* Take full width */
+            }
+        }
+    </style>
+</head>
+
+
+
+
+
+<body>
+
+    <nav style="display: flex; justify-content: space-between; padding:.6rem 3rem ;background-color: #f8f9fa;">
+        <h4>Social Networking Website</h4>
+
+
+
+        <button class="btn btn-warning" id="logoutBTN">Sign out</button>
+        <div id="initialButtons" class="text-center ">
+            <button id="showLoginBtn" class="btn btn-primary">Login</button>
+            <button id="showSignupBtn" class="btn btn-secondary">Signup</button>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!-- Initial Buttons -->
+
+
+
+        <div id="loginSection" class="mx-auto">
+            <h4 class="text-center font-semibold text-lg">
+                Login Form</h4>
+            <form id="loginForm">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="login-username">Email:</label>
+                        <input type="text" class="form-control" id="login-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password:</label>
+                        <input type="password" class="form-control" id="login-password" required>
+                    </div>
+                    <div style="display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-primary" style="width: 80%;">Login</button>
+                    </div>
+
+                </form>
+            </form>
+        </div>
+
+
+
+        <div id="signupContainer">
+            <div id="signupSection" style=" display: none; width: 25rem; margin: 1rem auto;">
+                <h4 class="mb-3">Signup Form</h4>
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="signup-username">Full Name:</label>
+                        <input type="text" class="form-control" id="signup-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email:</label>
+                        <input type="email" class="form-control" id="signup-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-phone">Phone:</label>
+                        <input type="number" class="form-control" id="signup-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password:</label>
+                        <input type="password" class="form-control" id="signup-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-cpassword">Confirm Password:</label>
+                        <input type="password" class="form-control" id="signup-cpassword" required>
+                    </div>
+
+                    <div style="display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-primary" style="width: 80%;">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+        <!-- Content Section -->
+        <div id="contentSection" style="display:none;">
+            <section>
+
+                <div style="width: 70%; margin: 1rem auto;" class=" p-4 rounded border">
+                    <p class="h3">Latest Posts</p>
+                    <div class="" style="width: 90%; border-radius: .5rem; margin: 4rem auto;">
+                        <input type="text" class="form-control" placeholder="Search Article">
+
+                    </div>
+
+                    <div id="articlesRow" style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;">
+                        <!-- Articles will be added here dynamically -->
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="mt-5 pt-5" style="border-top: 2px solid gray; width: 70%; margin: 3rem auto;">
+                    <h2>New Post</h2>
+                    <form id="articleForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="article-title">Title:</label>
+                            <input type="text" class="form-control" id="article-title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="article-description">Description:</label>
+                            <input type="text" class="form-control" id="article-description" name="description"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="article-image">Image:</label>
+                            <input type="file" class="form-control" id="article-image" name="image" required>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <button type="submit" class="btn btn-warning" style="width: 50%;">Upload</button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+
+        <div id="userDetailsContainer">
+        </div>
+    </div>
+
+
+    </section>
+    </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Check if user is logged in
+            var isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
+            console.log({ isLoggedIn })
+            if (isLoggedIn) {
+                $('#contentSection').show();
+                $('#loginSection').hide();
+                $('#signupSection').hide();
+                $('#initialButtons').hide();
+                $('#logoutBTN').show();
+                $('#signupImage').hide();
+                $('#loginImage').hide();
+
+            } else {
+                $('#contentSection').hide();
+                $('#loginSection').show();
+                $('#logoutBTN').hide();
+
+
+            }
+
+            $('#logoutBTN').click(() => {
+                localStorage.removeItem("isLoggedIn");
+                window.location.reload()
+            })
+
+            // Existing AJAX calls and event handlers here...
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#showLoginBtn').click(function () {
+                $('#loginSection').show();
+                $('#signupSection').hide();
+                // $('#signupImage').hide();
+                // $('#loginImage').show();
+
+            });
+
+            $('#showSignupBtn').click(function () {
+                $('#signupSection').show();
+                $('#loginSection').hide();
+                // $('#loginImage').hide();
+                // $('#signupImage').show();
+
+            });
+
+
+            $('#signupForm').submit(function (event) {
+                event.preventDefault();
+                // Here you should add your AJAX call for signup process
+                $('#initialButtons').hide();
+                $('#signupSection').hide();
+                $('#contentSection').show();
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+    <!-- Optional JavaScript and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/posts/all', // Adjust according to your API endpoint
+                success: function (articles) {
+                    console.log({ articles })
+                    articles.forEach(article => {
+                        const articleHtml = `
+                            <div class="p-2" style="border : 1px solid gray; border-radius :.5rem;">
+                                <div class="" style="width: 20rem; height: 13rem;">
+                                    <img src="${article.image}" class="mx-auto" alt="${article.title}" style="height: 100%; width:100%;">
+                                    </div>
+                                    <div class="mt-3 px-3 d-flex row" style="justify-content:space-between;align-items:center;">
+                                    <small class="">By . ${article.user.fullname}</small>
+                                    <button onclick="fetchUserDetails('${article.user._id}')" class="btn btn-outline-primary">View all from ${article.user.fullname}</button>
+
+                            </div>
+                                <div class="card-body" style="width:20rem">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <h7 class="card-title">${article.description}</h7>
+                            </div>
+                        </div>
+                    `;
+                        $('#articlesRow').append(articleHtml);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching articles:", error);
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <script>
+        function fetchUserDetails(userId) {
+            $.ajax({
+                type: 'GET',
+                url: `/users/${userId}`, 
+                success: function (data) {
+                    console.log('User Details:', data);
+                    $('#contentSection').hide();
+                    $('#loginSection').hide();
+                    $('#signupSection').hide();
+                    $('#userDetailsContainer').html(`
+                <div class="d-flex row" style="justify-content:space-between; align-items : center ;">
+                    <div>
+                        <p>Name: ${data[0]?.user?.fullname}</p>
+                <p>Email: ${data[0]?.user?.email}</p>
+                
+                    </div>
+                    <button class="btn btn-success">Follow </button>
+                    </div>
+                <div id="postsRow"  style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;"></div>
+
+            `);
+
+                    data.forEach(article => {
+                        console.log({ article })
+                        const articleHtml = `
+                            <div class="p-2" style="border : 1px solid gray; border-radius :.5rem;">
+                                <div class="" style="width: 20rem; height: 13rem;">
+                                    <img src="${article.image}" class="mx-auto" alt="${article.title}" style="height: 100%; width:100%;">
+                                    </div>
+                                    
+                                <div class="card-body" style="width:20rem">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <h7 class="card-title">${article.description}</h7>
+                            </div>
+                        </div>
+                        `;
+                        $('#postsRow').append(articleHtml);
+                    })
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching user details:", error);
+                    alert(error)
+                    // Optionally, inform the user that an error occurred.
+                    // For example, you could show an error message in the UI.
+                }
+            });
+        }
+
+    </script>
+
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            // $('#registrationFormBtn').click(function (event) {
+            $('#signupForm').submit(function (event) {
+
+                // Prevent the default form submission behavior
+                event.preventDefault();
+
+                // Gather the form data
+                var data = {
+                    fullname: $('#signup-username').val(),
+                    email: $('#signup-email').val(),
+                    phone: $('#signup-phone').val(),
+                    password: $('#signup-password').val(),
+                    cPassword: $('#signup-cpassword').val()
+                };
+
+                console.log({ data })
+
+                if (data.password.toUpperCase() !== data.cPassword.toUpperCase()) {
+                    return alert("Passwords Does not matched !")
+                }
+
+
+                // console.log({formData})
+                // Send the form data to the server using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/register', // Adjust if your endpoint is different
+                    data: data,
+                    success: function (response) {
+                        console.log({ response })
+                        $('#loginSection').hide();
+                        $('#initialButtons').hide();
+                        $('#contentSection').show();
+                        localStorage.setItem('isLoggedIn', true); // Set login status
+                        localStorage.setItem('userId', response._id); // Set login status
+                        window.location.reload()
+
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                        alert('Registration failed: ' + error);
+                        console.log(xhr, status, error); // For debugging purposes
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#loginForm').submit(function (event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+
+                // Gather the form data into an object
+                var loginData = {
+                    email: $('#login-username').val(),
+                    password: $('#login-password').val()
+                };
+
+                // Send the login data to the server using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/login', // Adjust if your endpoint is different
+                    contentType: 'application/json', // Specify the content type
+                    data: JSON.stringify(loginData), // Convert the loginData object to a JSON string
+                    success: function (response) {
+                        console.log({ response })
+                        $('#loginSection').hide();
+                        $('#initialButtons').hide();
+                        $('#contentSection').show();
+                        localStorage.setItem('isLoggedIn', true); // Set login status
+                        localStorage.setItem('userId', response._id); // Set login status
+                        window.location.reload()
+
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                        alert('Login failed: ' + error);
+                        console.log(xhr, status, error); // For debugging purposes
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#articleForm').on('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                var formData = new FormData(this); // Create a FormData object, passing the form
+                var userId = localStorage.getItem('userId');
+                formData.append("userId", userId)
+                console.log({ userId })
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/posts/new', // Adjust the URL to your needs
+                    data: formData,
+                    processData: false, // Tell jQuery not to process the data
+                    contentType: false, // Tell jQuery not to set contentType
+                    success: function (response) {
+                        console.log(response);
+                        alert('Article added successfully!');
+                        window.location.reload()
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        alert('Failed to add article.');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+    <!-- Optional Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <div id="contactFormPopup"
+        style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); padding-top: 60px;">
+        <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+            <!-- Popup content -->
+            <span class="close-btn"
+                style="color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
+            <h4 class="mt-2 mb-4">Contact Form</h4>
+            <!-- Your form fields here -->
+            <form style="display: flex; width: 90%;flex-direction: column;">
+                <input type="text" class="form-control mb-2" placeholder="Your Name">
+                <input type="text" class="form-control mb-2" placeholder="Email">
+                <input type="text" class="form-control mb-2" placeholder="Message">
+                <button type="submit" class="btn btn-warning">Send</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <footer
+        style="background-color: #f8f9fa; text-align: center; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e7e7e7;">
+        <button id="contactUsBtn"
+            style="margin-right: 15px; color: #007bff; text-decoration: none; border:  none; background-color: transparent;">Contact
+            Us</button>
+        <a href="/privacy-policy" style="margin-right: 15px; color: #007bff; text-decoration: none;">Privacy Policy</a>
+        <a href="/about-us" style="color: #007bff; text-decoration: none;">About Us</a>
+    </footer>
+
+
+
+    <script>
+        $(document).ready(function () {
+            // Open popup
+            $("#contactUsBtn").click(function () {
+                $("#contactFormPopup").show();
+            });
+
+            // Close popup when clicking on the close button
+            $(".close-btn").click(function () {
+                $("#contactFormPopup").hide();
+            });
+
+            // Close popup when clicking anywhere outside of it
+            $(window).click(function (e) {
+                if ($(e.target).attr('id') === "contactFormPopup") {
+                    $("#contactFormPopup").hide();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
