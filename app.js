@@ -19,6 +19,8 @@ app.use('/', express.static(__dirname + '/public'));
 
 
 
+
+/// file upload
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'public/uploads/');
@@ -49,7 +51,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 // Rest of your express server code
 
 
-
+//posts schema
 const articleSchema = new mongoose.Schema({
     user : {
       type : mongoose.Types.ObjectId , ref : "User"
@@ -96,7 +98,7 @@ app.get('/', (req, res) => {
 
 
 
-
+// register user
 app.post("/register",    async(req ,res) =>{
     try {
         console.log(req.body)
@@ -116,6 +118,9 @@ app.post("/register",    async(req ,res) =>{
 
 })
 
+
+
+// login user
 app.post("/login", async(req ,res) =>{
     console.log(req.body)
     try {
@@ -137,6 +142,8 @@ app.post("/login", async(req ,res) =>{
 })
 
 
+
+ // get all posts
 app.get('/posts/all',  async (req, res) => {
   try {
     const allArticles = await Article.find().populate("user")
@@ -149,6 +156,8 @@ app.get('/posts/all',  async (req, res) => {
 
 
 
+
+// get all posts of a specific user
 app.get('/users/:userId',  async (req, res) => {
   try {
     const allArticles = await Article.find({user : req.params.userId}).populate("user")
@@ -161,7 +170,7 @@ app.get('/users/:userId',  async (req, res) => {
 
 
 
-// POST route to handle AJAX request
+// add new post
 app.post('/posts/new', upload.single("image"), async (req, res) => {
 
 try {
@@ -189,11 +198,6 @@ try {
 
 
 
-
-  
-  
-  
-  
   
 
 

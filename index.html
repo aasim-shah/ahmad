@@ -45,6 +45,9 @@
             font-size: 28px;
             font-weight: bold;
         }
+        .form-control{
+            border-radius: .41rem;
+        }
 
         .close-btn:hover,
         .close-btn:focus {
@@ -122,17 +125,17 @@
 
 
 
-<body>
+<body style="background-color: #bababa92;">
 
-    <nav style="display: flex; justify-content: space-between; padding:.6rem 3rem ;background-color: #f8f9fa;">
-        <h4>Social Networking Website</h4>
+    <nav style="display: flex; justify-content: space-between; padding:1rem 3rem ;background-color: #38638e;">
+        <h4 class="text-white">Social Networking Website</h4>
 
 
 
         <button class="btn btn-warning" id="logoutBTN">Sign out</button>
-        <div id="initialButtons" class="text-center ">
-            <button id="showLoginBtn" class="btn btn-primary">Login</button>
-            <button id="showSignupBtn" class="btn btn-secondary">Signup</button>
+        <div id="initialButtons" class="text-center gap-2 ">
+            <button id="showLoginBtn" class="btn btn-outline-light">Login</button>
+            <button id="showSignupBtn" class="btn btn-outline-warning">Signup</button>
         </div>
     </nav>
 
@@ -141,21 +144,21 @@
 
 
 
-        <div id="loginSection" class="mx-auto">
+        <div id="loginSection" class="mx-auto" style="height: 70vh;">
             <h4 class="text-center font-semibold text-lg">
                 Login Form</h4>
             <form id="loginForm">
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="login-username">Email:</label>
-                        <input type="text" class="form-control" id="login-username" required>
+                        <input type="text" class="form-control" id="login-username"  placeholder="Email Address" required>
                     </div>
                     <div class="form-group">
                         <label for="login-password">Password:</label>
-                        <input type="password" class="form-control" id="login-password" required>
+                        <input type="password" class="form-control" placeholder="Password" id="login-password" required>
                     </div>
                     <div style="display: flex; justify-content: center;">
-                        <button type="submit" class="btn btn-primary" style="width: 80%;">Login</button>
+                        <button type="submit" class="btn text-white " style="width: 80%; background-color: #38638e;">Login</button>
                     </div>
 
                 </form>
@@ -165,24 +168,24 @@
 
 
         <div id="signupContainer">
-            <div id="signupSection" style=" display: none; width: 25rem; margin: 1rem auto;">
+            <div id="signupSection" style=" display: none; width: 25rem; margin: 1rem auto; height: 90vh;">
                 <h4 class="mb-3">Signup Form</h4>
                 <form id="signupForm">
                     <div class="form-group">
                         <label for="signup-username">Full Name:</label>
-                        <input type="text" class="form-control" id="signup-username" required>
+                        <input type="text" class="form-control" placeholder="Name " id="signup-username" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-email">Email:</label>
-                        <input type="email" class="form-control" id="signup-email" required>
+                        <input type="email" class="form-control" placeholder="Email" id="signup-email" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-phone">Phone:</label>
-                        <input type="number" class="form-control" id="signup-phone" required>
+                        <input type="number" class="form-control" placeholder="Phone" id="signup-phone" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-password">Password:</label>
-                        <input type="password" class="form-control" id="signup-password" required>
+                        <input type="password" class="form-control" placeholder="Password" id="signup-password" required>
                     </div>
                     <div class="form-group">
                         <label for="signup-cpassword">Confirm Password:</label>
@@ -190,7 +193,7 @@
                     </div>
 
                     <div style="display: flex; justify-content: center;">
-                        <button type="submit" class="btn btn-primary" style="width: 80%;">Signup</button>
+                        <button type="submit" class="btn  text-white" style="width: 80%; background-color: #38638e;">Signup</button>
                     </div>
                 </form>
             </div>
@@ -203,7 +206,7 @@
         <div id="contentSection" style="display:none;">
             <section>
 
-                <div style="width: 70%; margin: 1rem auto;" class=" p-4 rounded border">
+                <div style="width: 70%; margin: 1rem auto; border: 2px solid #38638e; border-radius: .8rem; "   class=" p-4  ">
                     <p class="h3">Latest Posts</p>
                     <div class="" style="width: 90%; border-radius: .5rem; margin: 4rem auto;">
                         <input type="text" class="form-control" placeholder="Search Article">
@@ -221,7 +224,7 @@
 
 
 
-                <div class="mt-5 pt-5" style="border-top: 2px solid gray; width: 70%; margin: 3rem auto;">
+                <div class="mt-5 pt-5" style=" width: 70%; margin: 3rem auto; border: 2px solid  #38638e ; border-radius: 1rem; padding:  1rem 2rem;">
                     <h2>New Post</h2>
                     <form id="articleForm" enctype="multipart/form-data">
                         <div class="form-group">
@@ -573,13 +576,13 @@
 
 
 
-    <footer
-        style="background-color: #f8f9fa; text-align: center; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e7e7e7;">
+    <footer 
+        style="background-color: #38638e; text-align: center; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e7e7e7;">
         <button id="contactUsBtn"
-            style="margin-right: 15px; color: #007bff; text-decoration: none; border:  none; background-color: transparent;">Contact
+            style="margin-right: 15px; color: #fbfbfb; text-decoration: none; border:  none; background-color: transparent;">Contact
             Us</button>
-        <a href="/privacy-policy" style="margin-right: 15px; color: #007bff; text-decoration: none;">Privacy Policy</a>
-        <a href="/about-us" style="color: #007bff; text-decoration: none;">About Us</a>
+        <a href="/privacy-policy" style="margin-right: 15px; color: #ffffff; text-decoration: none;">Privacy Policy</a>
+        <a href="/about-us" style="color: #ffffff; text-decoration: none;">About Us</a>
     </footer>
 
 
