@@ -217,22 +217,22 @@
 
                 
                 <div class="" style="width: 15%; margin: 1rem auto; height: 80vh; display: flex; flex-direction: column; justify-content: center ; align-items: center; gap: 1rem;">
-                    <a href="#" class="btn btn-outline-dark px-4" >Home</a>
-                    <a href="#" class="btn btn-outline-dark px-4">Posts</a>
-                    <a href="#" id="contactUsBtn" class="btn btn-info mt-5 px-4">New Post</a>
+                    <a href="#" class="btn btn-outline-dark px-5" >Home</a>
+                    <a href="#" class="btn btn-outline-dark px-5">Posts</a>
+                    <a href="#" id="contactUsBtn" class="btn btn-info mt-5 px-5">New Post</a>
                 </div>
 
 
 
 
-                <div class="" style="width: 40%; margin: 1rem auto;  height: 80vh; overflow-y: scroll; ">
+                <div class="" style="width: 45%; margin: 1rem auto;  height: 80vh; overflow-y: scroll; ">
                     <div id="articlesRow" style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;">
                         <!-- Articles will be added here dynamically -->
                     </div>
 
                 </div>
 
-                <div class="" style="width: 30%; margin: 1rem auto ; height: 80vh; overflow-y: scroll;  ">
+                <div class="" style="width: 25%; margin: 1rem auto ; height: 80vh; overflow-y: scroll;  ">
                     <p class="text-dark">Latest posts</p>
                     <div id="articlesRowSidebar" style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;">
                         <!-- Articles will be added here dynamically -->
@@ -336,12 +336,12 @@
         $(document).ready(function () {
             $.ajax({
                 type: 'GET',
-                url: '/posts/all', // Adjust according to your API endpoint
+                url: '/M00873836', // Adjust according to your API endpoint
                 success: function (articles) {
                     console.log({ articles })
                     articles.forEach(article => {
                         const articleHtml = `
-                            <div class="p-2" style="border : 1px solid gray; width:100%; border-radius :.5rem;">
+                            <div class="p-2" style="border : 1px solid gray; width:97%; border-radius :.5rem;">
                                 <div class="" style=" height: 20rem;">
                                     <img src="${article.image}" class="mx-auto" alt="${article.title}" style="height: 100%; width:100%;">
                                     </div>
@@ -369,7 +369,7 @@
         $(document).ready(function () {
             $.ajax({
                 type: 'GET',
-                url: '/posts/all', // Adjust according to your API endpoint
+                url: '/M00873836', // Adjust according to your API endpoint
                 success: function (articles) {
                     console.log({ articles })
                     articles.reverse().forEach(article => {
@@ -559,7 +559,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/posts/new', // Adjust the URL to your needs
+                    url: '/M00873836', // Adjust the URL to your needs
                     data: formData,
                     processData: false, // Tell jQuery not to process the data
                     contentType: false, // Tell jQuery not to set contentType

@@ -144,7 +144,7 @@ app.post("/login", async(req ,res) =>{
 
 
  // get all posts
-app.get('/posts/all',  async (req, res) => {
+app.get('/M00873836',  async (req, res) => {
   try {
     const allArticles = await Article.find().populate("user")
     res.json(allArticles)
@@ -171,7 +171,7 @@ app.get('/users/:userId',  async (req, res) => {
 
 
 // add new post
-app.post('/posts/new', upload.single("image"), async (req, res) => {
+app.post('/M00873836', upload.single("image"), async (req, res) => {
 
 try {
     
