@@ -125,11 +125,15 @@
 
 
 
-<body style="background-color: #bababa92;">
+<body style="background-color: #e4e9f7;">
 
-    <nav style="display: flex; justify-content: space-between; padding:1rem 3rem ;background-color: #38638e;">
+    <nav style="display: flex; justify-content: space-between; padding:1rem 3rem ;background-color: #3a3665;">
         <h4 class="text-white">Social Networking Website</h4>
 
+        <div class="" style="width: 40%; border-radius: .5rem; margin: .3rem auto;" >
+            <input type="text" class="form-control" placeholder="Search Article">
+
+        </div>
 
 
         <button class="btn btn-warning" id="logoutBTN">Sign out</button>
@@ -139,7 +143,7 @@
         </div>
     </nav>
 
-    <div class="container mt-5">
+    <div class=" mt-5">
         <!-- Initial Buttons -->
 
 
@@ -158,7 +162,7 @@
                         <input type="password" class="form-control" placeholder="Password" id="login-password" required>
                     </div>
                     <div style="display: flex; justify-content: center;">
-                        <button type="submit" class="btn text-white " style="width: 80%; background-color: #38638e;">Login</button>
+                        <button type="submit" class="btn text-white " style="width: 80%; background-color: #3a3665;">Login</button>
                     </div>
 
                 </form>
@@ -193,7 +197,7 @@
                     </div>
 
                     <div style="display: flex; justify-content: center;">
-                        <button type="submit" class="btn  text-white" style="width: 80%; background-color: #38638e;">Signup</button>
+                        <button type="submit" class="btn  text-white" style="width: 80%; background-color: #3a3665;">Signup</button>
                     </div>
                 </form>
             </div>
@@ -206,48 +210,43 @@
         <div id="contentSection" style="display:none;">
             <section>
 
-                <div style="width: 70%; margin: 1rem auto; border: 2px solid #38638e; border-radius: .8rem; "   class=" p-4  ">
-                    <p class="h3">Latest Posts</p>
-                    <div class="" style="width: 90%; border-radius: .5rem; margin: 4rem auto;">
-                        <input type="text" class="form-control" placeholder="Search Article">
 
-                    </div>
 
+             <div class="d-flex" style="flex-direction: row; width: 100%; ">
+
+
+                
+                <div class="" style="width: 15%; margin: 1rem auto; height: 80vh; display: flex; flex-direction: column; justify-content: center ; align-items: center; gap: 1rem;">
+                    <a href="#" class="btn btn-outline-dark px-4" >Home</a>
+                    <a href="#" class="btn btn-outline-dark px-4">Posts</a>
+                    <a href="#" id="contactUsBtn" class="btn btn-info mt-5 px-4">New Post</a>
+                </div>
+
+
+
+
+                <div class="" style="width: 40%; margin: 1rem auto;  height: 80vh; overflow-y: scroll; ">
                     <div id="articlesRow" style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;">
                         <!-- Articles will be added here dynamically -->
                     </div>
+
                 </div>
 
+                <div class="" style="width: 30%; margin: 1rem auto ; height: 80vh; overflow-y: scroll;  ">
+                    <p class="text-dark">Latest posts</p>
+                    <div id="articlesRowSidebar" style="display: flex; flex-direction: row; gap: 1rem;flex-wrap: wrap;">
+                        <!-- Articles will be added here dynamically -->
+                    </div>
 
-
-
-
-
-
-                <div class="mt-5 pt-5" style=" width: 70%; margin: 3rem auto; border: 2px solid  #38638e ; border-radius: 1rem; padding:  1rem 2rem;">
-                    <h2>New Post</h2>
-                    <form id="articleForm" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="article-title">Title:</label>
-                            <input type="text" class="form-control" id="article-title" name="title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="article-description">Description:</label>
-                            <input type="text" class="form-control" id="article-description" name="description"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="article-image">Image:</label>
-                            <input type="file" class="form-control" id="article-image" name="image" required>
-                        </div>
-                        <div style="display: flex; justify-content: center;">
-                            <button type="submit" class="btn btn-warning" style="width: 50%;">Upload</button>
-                        </div>
-                    </form>
                 </div>
+            </div>
+
+
+
+
         </div>
 
-        <div id="userDetailsContainer">
+        <div id="userDetailsContainer" class="container">
         </div>
     </div>
 
@@ -342,22 +341,50 @@
                     console.log({ articles })
                     articles.forEach(article => {
                         const articleHtml = `
-                            <div class="p-2" style="border : 1px solid gray; border-radius :.5rem;">
-                                <div class="" style="width: 20rem; height: 13rem;">
+                            <div class="p-2" style="border : 1px solid gray; width:100%; border-radius :.5rem;">
+                                <div class="" style=" height: 20rem;">
                                     <img src="${article.image}" class="mx-auto" alt="${article.title}" style="height: 100%; width:100%;">
                                     </div>
-                                    <div class="mt-3 px-3 d-flex row" style="justify-content:space-between;align-items:center;">
+                                    <div class="mt-3 px-5 d-flex row" style="justify-content:space-between;align-items:center;">
                                     <small class="">By . ${article.user.fullname}</small>
                                     <button onclick="fetchUserDetails('${article.user._id}')" class="btn btn-outline-primary">View all from ${article.user.fullname}</button>
 
                             </div>
-                                <div class="card-body" style="width:20rem">
+                                <div class="card-body">
                                     <h5 class="card-title">${article.title}</h5>
                                     <h7 class="card-title">${article.description}</h7>
                             </div>
                         </div>
                     `;
                         $('#articlesRow').append(articleHtml);
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching articles:", error);
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/posts/all', // Adjust according to your API endpoint
+                success: function (articles) {
+                    console.log({ articles })
+                    articles.reverse().forEach(article => {
+                        const articleHtml = `
+                            <div class="p-2" style="border : 1px solid gray; width:100%; border-radius :.5rem;">
+                                <div class="" style=" height: 10rem;">
+                                    <img src="${article.image}" class="mx-auto" alt="${article.title}" style="height: 100%; width:100%;">
+                                    </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${article.title}</h5>
+                                    <h7 class="card-title">${article.description}</h7>
+                            </div>
+                        </div>
+                    `;
+                        $('#articlesRowSidebar').append(articleHtml);
                     });
                 },
                 error: function (xhr, status, error) {
@@ -559,17 +586,36 @@
 
     <div id="contactFormPopup"
         style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); padding-top: 60px;">
-        <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 80%;">
+        <div style="background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 40%; border-radius: .9rem;">
             <!-- Popup content -->
-            <span class="close-btn"
+            <!-- <span class="close-btn"
                 style="color: #aaa; float: right; font-size: 28px; font-weight: bold;">&times;</span>
             <h4 class="mt-2 mb-4">Contact Form</h4>
-            <!-- Your form fields here -->
             <form style="display: flex; width: 90%;flex-direction: column;">
                 <input type="text" class="form-control mb-2" placeholder="Your Name">
                 <input type="text" class="form-control mb-2" placeholder="Email">
                 <input type="text" class="form-control mb-2" placeholder="Message">
                 <button type="submit" class="btn btn-warning">Send</button>
+            </form> -->
+
+            <h2>New Post</h2>
+            <form id="articleForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="article-title">Title:</label>
+                    <input type="text" class="form-control" id="article-title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="article-description">Description:</label>
+                    <input type="text" class="form-control" id="article-description" name="description"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="article-image">Image:</label>
+                    <input type="file" class="form-control" id="article-image" name="image" required>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit" class="btn btn-warning" style="width: 50%;">Upload</button>
+                </div>
             </form>
         </div>
     </div>
@@ -577,8 +623,8 @@
 
 
     <footer 
-        style="background-color: #38638e; text-align: center; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e7e7e7;">
-        <button id="contactUsBtn"
+        style="background-color: #3a3665; text-align: center; padding: 20px 0; margin-top: 20px; border-top: 1px solid #e7e7e7;">
+        <button id=""
             style="margin-right: 15px; color: #fbfbfb; text-decoration: none; border:  none; background-color: transparent;">Contact
             Us</button>
         <a href="/privacy-policy" style="margin-right: 15px; color: #ffffff; text-decoration: none;">Privacy Policy</a>
