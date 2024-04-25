@@ -41,7 +41,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/" , express.static("/public"))
 app.use(bodyParser.json());
 // MongoDB connection string
-const mongoDB = 'mongodb+srv://asim:mardan8110@cluster0.btwlh.mongodb.net/ahmad?retryWrites=true&w=majority'; // Replace 'myDb' with your actual database name
+// const mongoDB = 'mongodb+srv://asim:mardan8110@cluster0.btwlh.mongodb.net/ahmad?retryWrites=true&w=majority'; // Replace 'myDb' with your actual database name
+const mongoDB = 'mongodb://127.0.0.1:27017/cst2120?retryWrites=true&w=majority';
+
+
 
 // Connect to MongoDB
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
