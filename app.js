@@ -55,8 +55,6 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 
-
-
 //posts schema
 const articleSchema = new mongoose.Schema({
     user : {
